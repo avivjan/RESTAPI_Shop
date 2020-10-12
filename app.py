@@ -12,7 +12,7 @@ app = Flask(__name__)
 app.secret_key = "Hecktor"
 api = Api(app)
 
-jwt = JWT(app, authenticate, identity)  # /auth
+jwt = JWT(app, authenticate, identity)  # /auth Endpoint
 
 api.add_resource(Item, "/item/<string:name>")
 api.add_resource(ItemsList, "/items")
