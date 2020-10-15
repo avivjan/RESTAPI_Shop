@@ -33,7 +33,7 @@ class Item(Resource):
 
     def delete(self, name):
         try:
-            connection = sqlite3.connect("../data.db")
+            connection = sqlite3.connect("data.db")
             cursor = connection.cursor()
 
             delete_query = "DELETE FROM items WHERE name=?"
