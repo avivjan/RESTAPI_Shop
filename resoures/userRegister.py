@@ -1,5 +1,5 @@
 import sqlite3
-from user import User
+from models.user_model import UserModel
 from flask_restful import Resource, reqparse
 
 class UserRegister(Resource):
@@ -10,10 +10,10 @@ class UserRegister(Resource):
     def post(self):
         data = UserRegister.parser.parse_args()
 
-        if User.find_by_username(data["username"]):
+        if UserModel.find_by_username(data["username"]):
             return {"massage": "This username is already exists"}, 400
 
-        connection = sqlite3.connect("data.db")
+        connection = sqlite3.connect("../data.db")
         cursor = connection.cursor()
 
         query = "INSERT INTO users VALUES (NULL, ?, ?)"
