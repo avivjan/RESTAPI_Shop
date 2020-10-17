@@ -1,6 +1,7 @@
 from flask_restful import Resource, reqparse
 import sqlite3
 from flask_jwt import jwt_required
+import os
 
 from models.item_model import Item_model
 
@@ -33,7 +34,7 @@ class Item(Resource):
 
     def delete(self, name):
         try:
-            connection = sqlite3.connect("data.db")
+            connection = sqlite3.connect(os.getcwd() + "/data.db")
             cursor = connection.cursor()
 
             delete_query = "DELETE FROM items WHERE name=?"
@@ -53,7 +54,6 @@ class Item(Resource):
             result = Item_model.find_by_name(name)
         except:
             return {"message": "An error occurred searching the result: {}".format(name)}, 500
-
 
         if result is None:
             try:

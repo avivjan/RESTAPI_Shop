@@ -2,6 +2,8 @@ from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT
 
+import create_tables
+
 from resoures.userRegister import UserRegister
 from resoures.itemList import ItemsList
 from resoures.item import Item
@@ -21,3 +23,4 @@ api.add_resource(UserRegister, "/register")
 
 if __name__ == "__main__":
     app.run(port=5000, debug=True)
+    create_tables.run()
