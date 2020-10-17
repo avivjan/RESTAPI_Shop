@@ -1,36 +1,24 @@
-import sqlite3
-import os
+from db import db
 
-class UserModel:
-    def __init__(self, _id, username, password):
-        self.id = _id
+class UserModel(db.Model):
+    __tablename__ = "users"
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80))
+    password = db.Column(db.String(80))
+
+    def __init__(self, username, password):
         self.username = username
         self.password = password
 
+    def add(self):
+        db.session.add(self)
+        db.session.commit()
+
     @classmethod
     def find_by_username(cls, username):
-        connection = sqlite3.connect(os.getcwd() + "/data.db")
-        cursor = connection.cursor()
-
-        query = "SELECT * FROM users WHERE username=?"
-        row = cursor.execute(query, (username, )).fetchone()
-        if row:
-            user = cls(*row)
-        else:
-            user = None
-        return user
+        return UserModel.query.filterby(username=username).first()
 
     @classmethod
     def find_by_id(cls, _id):
-        connection = sqlite3.connect(os.getcwd() + "/data.db")
-        cursor = connection.cursor()
-
-        query = "SELECT * FROM users WHERE id=?"
-        row = cursor.execute(query, (_id, )).fetchone()
-        if row:
-            user = cls(*row)
-        else:
-            user = None
-        return user
-
+       return UserModel.query.filterby(id=_id).first()
 

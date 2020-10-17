@@ -1,17 +1,13 @@
 from db import db
 
-class Item_model(db.Model):
-    __tablename__ = "items"
+class Store_model(db.Model):
+
+    __tablename__ = "stores"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
-    price = db.Column(db.Float(precision=2))
-    store_id = db.Column(db.Integer, db.ForeignKey("stores.id"))
-    store = db.relationship("Store_model")
 
-
-    def __init__(self, name, price):
+    def __init__(self, name):
         self.name = name
-        self.price = price
 
     @classmethod
     def find_by_name(cls, name):
@@ -26,4 +22,4 @@ class Item_model(db.Model):
         db.session.commit()
 
     def json(self):
-        return {"name": self.name, "price": self.price}
+        return {"name": self.name, "items": self.items}
