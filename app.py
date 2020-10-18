@@ -15,7 +15,7 @@ from resoures.store_list import StoreList
 
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL, sqlite:///data.db") # If the
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL", "sqlite:///data.db")   # If the envarioment var is not assigned use the local SQlite
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.secret_key = "Hecktor"
 api = Api(app)
