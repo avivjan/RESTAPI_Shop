@@ -1,9 +1,9 @@
 from flask_restful import Resource
 
-from models.item_model import Item_model
+from models.itemmodel import ItemModel
 
 
 class ItemsList(Resource):
     def get(self):
-        return {"items": [item.json for item in Item_model.query().all()]}
+        return {"items": [item.json for item in ItemModel.query.all()]}
                # list(map(item.json(), Item_model.query().all())) is the same

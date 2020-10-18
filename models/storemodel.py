@@ -1,10 +1,11 @@
 from db import db
 
-class Store_model(db.Model):
+class StoreModel(db.Model):
 
     __tablename__ = "stores"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
+    items = db.relationship("ItemModel", lazy="dynamic")
 
     def __init__(self, name):
         self.name = name
@@ -13,7 +14,7 @@ class Store_model(db.Model):
     def find_by_name(cls, name):
         return cls.query.filter_by(name=name).first()
 
-    def add_or_update(self):
+    def add(self):
         db.session.add(self)
         db.session.commit()
 
@@ -22,4 +23,4 @@ class Store_model(db.Model):
         db.session.commit()
 
     def json(self):
-        return {"name": self.name, "items": self.items}
+        return {'name': self.name, 'items': [item.json() for item in self.items.all()], "id": self.id}
