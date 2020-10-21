@@ -2,7 +2,7 @@ import os
 
 from flask import Flask
 from flask_restful import Api
-from flask_jwt import JWT
+from flask_jwt_extended import JWTManager
 from security import authenticate, identity
 from db import db
 
