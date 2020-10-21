@@ -2,6 +2,7 @@ from flask_restful import Resource, reqparse
 from flask_jwt_extended import create_access_token, create_refresh_token
 from models.user_model import UserModel
 
+
 class UserLogin(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument("username", required=True, help="You must enter an username")
@@ -12,7 +13,6 @@ class UserLogin(Resource):
         data = cls.parser.parse_args()
         user = UserModel.find_by_username(data["username"])
         if user and user.password == data["password"]:
-
             access_token = create_access_token(identity=user.id, fresh=True)
             refresh_token = create_refresh_token(user.id)
             return {

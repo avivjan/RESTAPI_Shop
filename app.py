@@ -37,5 +37,12 @@ def create_tables():
     db.create_all()
 
 
+@jwt.user_claims_loader()
+def add_claims_to_jwt(identity):
+    if identity == 1:
+        return {"is_admin": True}
+    return {"is_admin": False}
+
+
 if __name__ == "__main__":
     app.run(port=5000, debug=True)
