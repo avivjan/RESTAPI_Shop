@@ -16,3 +16,5 @@ class User(Resource):
             return {"message": "User not found..."}, 404
         user.delete()
         return {"message": "User deleted"}, 200
+
+
