@@ -1,7 +1,7 @@
 from flask_restful import Resource, reqparse
 from flask_jwt_extended import jwt_required, get_jwt_claims, fresh_jwt_required
 
-from models.itemmodel import ItemModel
+from models.item_model import ItemModel
 
 class Item(Resource):
     parser = reqparse.RequestParser()

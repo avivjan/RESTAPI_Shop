@@ -1,7 +1,7 @@
 from flask_restful import Resource
 from flask_jwt_extended import jwt_optional,get_jwt_identity
 
-from models.itemmodel import ItemModel
+from models.item_model import ItemModel
 
 
 class ItemsList(Resource):
